@@ -5,3 +5,8 @@ export const getAllData = {
     url: `${apiBaseURL}search.php?s=`,
     key: 'getAll',
 };
+
+export const getSearchData = {
+    url: `${apiBaseURL}search.php?s=`,
+    key: 'cocktailList',
+};

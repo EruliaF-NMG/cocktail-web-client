@@ -6,7 +6,6 @@ import lodashGet from 'lodash.get';
  * @param (Array|string) path
  * @param (*) defaultValue
  */
-
 const _get = (object, path, defaultValue) => {
     return lodashGet(object, path, defaultValue);
 };

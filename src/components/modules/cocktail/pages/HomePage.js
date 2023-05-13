@@ -1,28 +1,51 @@
 import { useEffect,useContext } from 'react';
 
 import { BaseTemplate } from '../../../ui-components/templates/BaseTemplate';
+import { ItemSearchANDRefresh } from '../../../ui-components/custom-elements/ItemSearchANDRefresh';
+import { CocktailItem } from '../../../ui-components/custom-elements/CocktailItem';
 import { CoreContext } from '../../../global-context/context-providers/CoreContext.provider';
-import { getAllData } from '../../../../configs/apiEndPoints.config';
 import { _get } from '../../../../helpers/lodash.wrappers';
+import { getAllData,getSearchData } from '../../../../configs/apiEndPoints.config';
+import { IterateData } from '../../../ui-components/common/IterateData';
 
 const HomePage = () => {
 
     const [state, coreAction] = useContext(CoreContext);
 
     const isDataIsFetched=()=>{
-        return  _get(state,`apiResponses.${getAllData.key}.result`) ? true : false;
-     }
+       return  _get(state,`apiResponses.${getAllData.key}.result`) ? true : false;
+    }
 
     useEffect(()=>{
         if(!isDataIsFetched()) {
-           coreAction.sendAPIRequest(getAllData.url,getAllData.key);
+           coreAction.requestRandomList(getAllData.url,getAllData.key);
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
     return (
         <BaseTemplate>
-            home
+            <ItemSearchANDRefresh
+                onRefresh={()=>coreAction.requestRandomList(getAllData.url,getAllData.key,!isDataIsFetched())}
+                onSearch={(searchText)=>coreAction.sendAPIRequest(`${getSearchData.url}${searchText}`,getSearchData.key)}
+            />
+            <IterateData
+                className='home-page-wrapper'
+                array={_get(state,`apiResponses.cocktailList.result`,[])}
+                callBackElement={(cocktail,index)=>{
+                    return (
+                        <CocktailItem
+                            itemId={cocktail.idDrink}
+                            name={cocktail.strDrink}
+                            category={cocktail.strCategory}
+                            image={cocktail.strDrinkThumb}
+                            key={index}
+                            onAddWishList={(id)=>{}}
+                            onRemoveWishList={(id)=>{}}
+                        />
+                    )
+                }}
+            />
         </BaseTemplate>
     );
   };

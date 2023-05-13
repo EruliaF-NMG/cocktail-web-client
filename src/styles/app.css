@@ -3,3 +3,6 @@
 @tailwind utilities;
 
 @import "./ui-components/common/navbar.css";
+@import "./ui-components/custom-elements/item-search-and-refresh.css";
+@import "./ui-components/custom-elements/cocktail-Item.css";
+@import "./modules/home.css";

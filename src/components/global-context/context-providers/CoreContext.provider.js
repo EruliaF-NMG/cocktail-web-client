@@ -2,11 +2,13 @@ import { createContext, useReducer } from 'react';
 
 import { _get } from '../../../helpers/lodash.wrappers';
 import { coreAction } from '../actions/coreContext.actions';
+import { getRandomList } from '../../../helpers/common.helper';
 import {
     initApiResponseKey,
     setApiResponseKey,
     setApiResponseErrorKey,
     setApiResponseLoadingStatusKey,
+    setRandomListKey,
 } from '../../../configs/actionKeys.config';
 
 const initialState = {
@@ -72,6 +74,19 @@ const coreReducer = (state, action) => {
                     }
                 }
             } 
+        case setRandomListKey:   
+            return {
+                ...state,
+                apiResponses: {
+                    ...state.apiResponses,
+                    "cocktailList": {
+                        isLoading:false,
+                        isError:false,
+                        result:getRandomList(_get(state,`apiResponses.${action.stateKey}.result`,[])),
+                        _updateStatus: !_get(state,`apiResponses.cocktailList._updateStatus`,false),
+                    }
+                }
+            }
         default:
             return state;
     }

@@ -3,6 +3,7 @@ import {
   setApiResponseKey,
   setApiResponseErrorKey,
   setApiResponseLoadingStatusKey,
+  setRandomListKey,
 } from '../../../configs/actionKeys.config';
 import { getData } from '../../../helpers/axios.wrapper';
 
@@ -88,6 +89,22 @@ const sendAPIRequest = async (dispatch, apiUrl = null,apiKey=null) => {
   }
 };
 
+
+/**
+ * request random data list
+ * @param {Function} dispatch 
+ * @param {String} apiUrl 
+ * @param {String} apiKey
+ * @param {Boolean} isFirstRequest
+ */
+const requestRandomList = async (dispatch, apiUrl = null,apiKey=null,isFirstRequest=true) => {
+  if(isFirstRequest) await sendAPIRequest(dispatch,apiUrl,apiKey);
+  dispatch({
+    type: setRandomListKey,
+    stateKey: apiKey,
+  });
+}
+
 /**
  * single entry point to access all action methods
  * @param {Function} dispatch 
@@ -97,6 +114,7 @@ const coreAction = (dispatch) => {
     sendAPIRequest: (apiUrl,apiKey) => sendAPIRequest(dispatch, apiUrl,apiKey),
     setErrorObject: (apiKey, result) => setErrorObject(dispatch, apiKey, result),
     setResponseLoadingStatus: (apiKey, result) => setResponseLoadingStatus(dispatch, apiKey, result),
+    requestRandomList: (apiUrl,apiKey,isFirstRequest) => requestRandomList(dispatch, apiUrl,apiKey,isFirstRequest),
   };
 };
 

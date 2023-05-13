@@ -1,0 +1,12 @@
+
+.search-and-refresh-btn-wrapper {
+    @apply w-full md:w-auto justify-between flex mt-8 md:mt-0;
+}
+
+.refresh-btn-style {
+    @apply p-4 !bg-blue-500 rounded-md text-white md:w-28 w-5/12;
+}
+
+.search-btn-style {
+    @apply refresh-btn-style md:mx-3;
+}
