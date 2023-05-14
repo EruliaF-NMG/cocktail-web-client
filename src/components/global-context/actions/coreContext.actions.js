@@ -4,6 +4,8 @@ import {
   setApiResponseErrorKey,
   setApiResponseLoadingStatusKey,
   setRandomListKey,
+  addToWishListKey,
+  removeFromWishListKey
 } from '../../../configs/actionKeys.config';
 import { getData } from '../../../helpers/axios.wrapper';
 
@@ -106,6 +108,30 @@ const requestRandomList = async (dispatch, apiUrl = null,apiKey=null,isFirstRequ
 }
 
 /**
+ * add item for wish list
+ * @param {Function} dispatch 
+ * @param {String} itemId 
+ */
+const addToWishList = (dispatch,itemId) => {
+  dispatch({
+    type: addToWishListKey,
+    payload: itemId,
+  });
+};
+
+/**
+ * remove item from wish list
+ * @param {Function} dispatch 
+ * @param {String} itemId 
+ */
+const removeFromWishList = (dispatch,itemId) => {
+  dispatch({
+    type: removeFromWishListKey,
+    payload: itemId,
+  });
+};
+
+/**
  * single entry point to access all action methods
  * @param {Function} dispatch 
  */
@@ -115,6 +141,8 @@ const coreAction = (dispatch) => {
     setErrorObject: (apiKey, result) => setErrorObject(dispatch, apiKey, result),
     setResponseLoadingStatus: (apiKey, result) => setResponseLoadingStatus(dispatch, apiKey, result),
     requestRandomList: (apiUrl,apiKey,isFirstRequest) => requestRandomList(dispatch, apiUrl,apiKey,isFirstRequest),
+    addToWishList: (itemId) => addToWishList(dispatch,itemId),
+    removeFromWishList: (itemId) => removeFromWishList(dispatch,itemId),
   };
 };
 

@@ -1,5 +1,6 @@
 import HomePage from './pages/HomePage';
 import WishListPage from './pages/WishListPage';
+import ViewCocktailPage from './pages/ViewCocktail';
 
 const cocktailRoutes = [
         {
@@ -9,6 +10,10 @@ const cocktailRoutes = [
         {
             path: '/wish-list',
             element: <WishListPage />
+        },
+        {
+            path: '/cocktail/:id',
+            element: <ViewCocktailPage />
         }
 ];
 

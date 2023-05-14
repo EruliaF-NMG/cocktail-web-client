@@ -40,8 +40,9 @@ const HomePage = () => {
                             category={cocktail.strCategory}
                             image={cocktail.strDrinkThumb}
                             key={index}
-                            onAddWishList={(id)=>{}}
-                            onRemoveWishList={(id)=>{}}
+                            currentWishList={state.wishList}
+                            onAddWishList={(id)=>{coreAction.addToWishList(id)}}
+                            onRemoveWishList={(id)=>{coreAction.removeFromWishList(id)}}
                         />
                     )
                 }}

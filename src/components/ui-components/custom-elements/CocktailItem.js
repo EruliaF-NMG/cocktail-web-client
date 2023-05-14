@@ -9,9 +9,23 @@ const CocktailItem = ({
     name='',
     category='',
     itemId='',
+    showAddBtn=true,
+    showRemoveBtn=true,
+    currentWishList=[],
     onAddWishList=emptyFunction,
     onRemoveWishList=emptyFunction
 }) =>{
+
+    const isShowAddToWishList = () => {
+        if( showAddBtn === true && currentWishList.indexOf(itemId) === -1 ) return true;
+        return false;
+    }
+
+    const isShowRemoveFromWishList = () => {
+        if( showRemoveBtn === true && currentWishList.indexOf(itemId) !== -1 ) return true;
+        return false;
+    }
+
     return (
         <div className={'w-full shadow-xl'}>
             <NavLink to={`/cocktail/${itemId}`}>
@@ -19,8 +33,12 @@ const CocktailItem = ({
             </NavLink>
             <div className='cocktail-item-detail-wrapper'>
                 <div><p className='text-xs text-white'>{name}({category})</p></div>
-                <Button className='cocktail-item-wish-list-btn bg-blue-500' onClick={()=>onAddWishList(itemId)}>Add To WishList</Button>
-                <Button className='cocktail-item-wish-list-btn bg-red-500' onClick={()=>onRemoveWishList(itemId)}>Remove</Button>
+                {
+                    (isShowAddToWishList()) ? <Button className='cocktail-item-wish-list-btn bg-blue-500' onClick={()=>onAddWishList(itemId)}>Add To WishList</Button> : null
+                }
+                {
+                    (isShowRemoveFromWishList()) ? <Button className='cocktail-item-wish-list-btn bg-red-500' onClick={()=>onRemoveWishList(itemId)}>Remove</Button> : null
+                }
             </div>
         </div>
     );

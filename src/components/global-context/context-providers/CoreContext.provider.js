@@ -2,17 +2,20 @@ import { createContext, useReducer } from 'react';
 
 import { _get } from '../../../helpers/lodash.wrappers';
 import { coreAction } from '../actions/coreContext.actions';
-import { getRandomList } from '../../../helpers/common.helper';
+import { getRandomList,removeItemFromArray } from '../../../helpers/common.helper';
 import {
     initApiResponseKey,
     setApiResponseKey,
     setApiResponseErrorKey,
     setApiResponseLoadingStatusKey,
     setRandomListKey,
+    addToWishListKey,
+    removeFromWishListKey
 } from '../../../configs/actionKeys.config';
 
 const initialState = {
     apiResponses: {},
+    wishList: [],
 };
 
 const CoreContext = createContext({});
@@ -86,6 +89,21 @@ const coreReducer = (state, action) => {
                         _updateStatus: !_get(state,`apiResponses.cocktailList._updateStatus`,false),
                     }
                 }
+            }
+        case addToWishListKey:   
+            return {
+                ...state,
+                wishList: [
+                    ...state.wishList,
+                    ...[action.payload],
+                ]
+            } 
+        case removeFromWishListKey:   
+            return {
+                ...state,
+                wishList: [
+                    ...removeItemFromArray(state.wishList,action.payload),
+                ]
             }
         default:
             return state;
