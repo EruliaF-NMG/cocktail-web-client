@@ -27,7 +27,7 @@ const CocktailItem = ({
     }
 
     return (
-        <div className={'w-full shadow-xl'}>
+        <div className={'w-full shadow-xl'} data-testid={`cocktail_item_${itemId}`}>
             <NavLink to={`/cocktail/${itemId}`}>
                 <img alt='name' className='w-full' src={image} />
             </NavLink>

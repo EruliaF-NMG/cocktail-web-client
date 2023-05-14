@@ -9,7 +9,6 @@ const getData = async (
 ) => {
     try {
         const response = await axios.get(apiUrl);
-        console.log(response);
         return {
             _status: true,
             data: response.data.drinks

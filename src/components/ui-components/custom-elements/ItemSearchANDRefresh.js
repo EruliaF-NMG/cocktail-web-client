@@ -10,6 +10,12 @@ const ItemSearchANDRefresh = ({
     onSearch=emptyFunction,
 }) =>{
     const [searchText,setSearchText] = useState('');
+
+    const onRefreshList=()=>{
+        setSearchText("");
+        onRefresh();
+    }
+
     return(
         <div className='md:flex md:justify-center'>
             <InputBox 
@@ -22,7 +28,7 @@ const ItemSearchANDRefresh = ({
             />
             <div className='search-and-refresh-btn-wrapper'>
                 <Button className='search-btn-style' onClick={()=>onSearch(searchText)}>Search</Button>
-                <Button className='refresh-btn-style' onClick={()=>onRefresh()}>Refresh</Button>
+                <Button className='refresh-btn-style' onClick={()=>onRefreshList()}>Refresh</Button>
             </div>
         </div>
     );
