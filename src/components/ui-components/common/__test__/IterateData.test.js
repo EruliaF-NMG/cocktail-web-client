@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { IterateData } from '../IterateData';
 
-const mockedFunction = jest.fn();
 const mockedChild = (value,index) =>{
     return (
         <div key={index} data-testid={`item_${index}`}>value</div>
